@@ -4,6 +4,8 @@ final class VideoRouter {
     static let shared = VideoRouter()
 
     var watchViewControllerFactory: ((Video) -> WatchViewController)?
+    /// Shorts open in their own full-screen vertical feed, not the watch screen.
+    var shortsViewControllerFactory: ((Video, ShortsEntry) -> UIViewController)?
     /// Lets Core screens push a channel without importing Features.
     var channelViewControllerFactory: ((String, String) -> UIViewController)?
     private var panel: PlayerPanelViewController?
@@ -20,7 +22,23 @@ final class VideoRouter {
 
     private init() {}
 
-    func open(video: Video, from presenter: UIViewController) {
+    /// - Parameter shorts: how the shorts feed continues past `video` —
+    ///   see `ShortsEntry`.
+    func open(
+        video: Video,
+        from presenter: UIViewController,
+        shorts: ShortsEntry = .pool([])
+    ) {
+        if video.isShort, let makeShorts = shortsViewControllerFactory {
+            // The outermost one: Library's segments sit in an embedded
+            // navigation controller whose view stops below the status bar,
+            // and a full-screen feed pushed there leaves that strip showing
+            // the screen underneath.
+            presenter.visibleNavigationController?.pushViewController(
+                makeShorts(video, shorts), animated: true
+            )
+            return
+        }
         if let panel {
             panel.watchVC.loadVideo(video)
             panel.expand(animated: true)

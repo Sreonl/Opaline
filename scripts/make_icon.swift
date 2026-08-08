@@ -23,8 +23,6 @@ let overrides: [(String, String)] = CommandLine.arguments.dropFirst(2).compactMa
 }
 let fullSet: [(String, String)] = [
     ("gearshape.fill", "icon_Gear"),
-    ("gobackward.10", "icon_Gobackward_10"),
-    ("goforward.10", "icon_Goforward_10"),
     ("house.fill", "icon_House_Fill"),
     ("magnifyingglass", "icon_Magnifyingglass"),
     ("play.rectangle.fill", "icon_Play_Rectangle"),
@@ -40,7 +38,10 @@ let fullSet: [(String, String)] = [
     ("text.append", "icon_text_append"),
     ("clock", "icon_clock"),
     ("minus.circle", "icon_minus_circle"),
-    ("info.circle", "icon_info_circle")
+    ("info.circle", "icon_info_circle"),
+    ("arrow.counterclockwise", "icon_replay"),
+    ("backward.end.fill", "icon_previous"),
+    ("forward.end.fill", "icon_next")
 ]
 
 /// Renders the symbol huge, then reports the image plus its ink bounds so

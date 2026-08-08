@@ -186,6 +186,7 @@
 "settings.title" = "設定";
 
 /* Section headers */
+"settings.section.appearance" = "外觀";
 "settings.section.theme" = "主題";
 "settings.section.playback" = "播放";
 "settings.section.autoDub" = "配音";
@@ -206,6 +207,7 @@
 
 /* Theme rows; segment labels for dark/light/auto modes */
 "settings.row.theme" = "主題";
+"settings.row.appIcon" = "應用程式圖示";
 "settings.theme.dark" = "深色";
 "settings.theme.light" = "淺色";
 "settings.theme.auto" = "自動";
@@ -221,7 +223,7 @@
 "settings.row.pip" = "子母畫面";
 "settings.row.hideStatusBar" = "全螢幕時隱藏狀態列";
 "settings.row.zoomToFill" = "全螢幕時縮放以填充";
-"settings.row.showShorts" = "在訂閱中顯示 YouTube Shorts";
+"settings.row.showShorts" = "顯示 Shorts";
 "settings.row.autoplay" = "自動播放";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "自動播放（%1$@）";
@@ -233,6 +235,7 @@
 
 /* Home layout row + option names */
 "settings.row.homeLayout" = "首頁佈局";
+"settings.row.defaultTab" = "啟動畫面";
 "settings.homeLayout.grid" = "格線";
 "settings.homeLayout.rails" = "橫向軌道";
 
@@ -259,6 +262,7 @@
 "settings.row.playbackSource" = "播放來源";
 "settings.row.solverServer" = "Solver server";
 "settings.row.shareLog" = "分享除錯記錄";
+"settings.row.support" = "支持開發";
 "settings.row.feedback" = "提供意見回饋";
 /* Solver-server URL alert */
 "settings.solver.message" = "解算器伺服器的 URL。";

@@ -28,7 +28,13 @@ final class ChannelViewController: VideosViewController {
         )
     }()
 
+    override var usesShortsGrid: Bool { currentTab == .shorts }
+
     override var columns: Int {
+        // Shorts are narrow, so they tile several to a row even on a phone.
+        if usesShortsGrid {
+            return UIDevice.current.userInterfaceIdiom == .phone ? 3 : 6
+        }
         if UIDevice.current.userInterfaceIdiom == .phone {
             return 1
         }
@@ -150,6 +156,19 @@ final class ChannelViewController: VideosViewController {
     }
 
     override func openVideo(_ video: Video) {
+        if currentTab == .shorts {
+            // The one surface that keeps its own order: the official app
+            // swipes a channel's Shorts tab in the tab's order rather than
+            // handing straight over to the recommendation sequence.
+            let loaded = sections.flatMap { $0.videos }
+            let following = loaded
+                .drop { $0.id != video.id }
+                .dropFirst()
+            videoRouter.open(
+                video: video, from: self, shorts: .list(Array(following))
+            )
+            return
+        }
         guard currentTab == .playlists,
               let playlist = playlistLookup[video.id] else {
             super.openVideo(video)

@@ -33,10 +33,32 @@ extension InnertubeClient {
             ),
             likeCount: likeInfo.likeCount,
             likeStatus: likeInfo.likeStatus,
+            commentCount: parseCommentCount(json),
             nextVideo: autoplayNextVideo(json),
             playlistTitle: pivot?.title,
             playlistVideos: pivot?.videos
         )
+    }
+
+    /// The comments engagement panel's header carries the total. Both the
+    /// TV and WEB clients put it there; only the comments panel has one.
+    static func parseCommentCount(_ json: [String: Any]) -> String? {
+        let panels = json["engagementPanels"] as? [[String: Any]] ?? []
+        for panel in panels {
+            guard let section = panel.digDict(
+                "engagementPanelSectionListRenderer"
+            ), (section["panelIdentifier"] as? String)?
+                .contains("comment") == true,
+                let header = section.digDict(
+                    JSONKey.header, "engagementPanelTitleHeaderRenderer"
+                ) else {
+                continue
+            }
+            if let text = header.runsText("contextualInfo") {
+                return text
+            }
+        }
+        return nil
     }
 
     static func parseWatchLikeInfo(
@@ -252,10 +274,12 @@ private extension InnertubeClient {
         let status = (renderer["likeStatus"]
             as? String)
             .flatMap(LikeStatus.init(rawValue:))
+        // `likeCountText` is the TV client's key for the same value; without
+        // it a TV watch response parses as having no likes at all.
         let count = simpleText(
             from: renderer["likeCount"]
-        ) ?? (renderer["likeCountNotliked"]
-            as? String)
+        ) ?? simpleText(from: renderer["likeCountText"])
+            ?? (renderer["likeCountNotliked"] as? String)
         return (count, status)
     }
 }

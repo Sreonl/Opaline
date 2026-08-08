@@ -55,6 +55,7 @@
 "common.subscribed" = "Subscribed";
 /* Generic cancel action */
 "common.cancel" = "Cancel";
+"common.close" = "Close";
 /* Generic confirmation button */
 "common.ok" = "OK";
 /* Generic save action */
@@ -210,6 +211,7 @@
 "settings.title" = "Settings";
 
 /* Section headers */
+"settings.section.appearance" = "Appearance";
 "settings.section.theme" = "Theme";
 "settings.section.playback" = "Playback";
 "settings.section.autoDub" = "Dubbing";
@@ -230,6 +232,7 @@
 
 /* Theme rows; segment labels for dark/light/auto modes */
 "settings.row.theme" = "Theme";
+"settings.row.appIcon" = "App Icon";
 "settings.theme.dark" = "Dark";
 "settings.theme.light" = "Light";
 "settings.theme.auto" = "Auto";
@@ -245,7 +248,7 @@
 "settings.row.pip" = "Picture-in-Picture";
 "settings.row.hideStatusBar" = "Hide Status Bar in Fullscreen";
 "settings.row.zoomToFill" = "Zoom to Fill in Fullscreen";
-"settings.row.showShorts" = "Show YouTube Shorts in Subscriptions";
+"settings.row.showShorts" = "Show Shorts";
 "settings.row.autoplay" = "Autoplay";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "Autoplay (%1$@)";
@@ -257,6 +260,7 @@
 
 /* Home layout row + option names */
 "settings.row.homeLayout" = "Home Layout";
+"settings.row.defaultTab" = "Default Screen";
 "settings.homeLayout.grid" = "Plain Grid";
 "settings.homeLayout.rails" = "Shelf Rails";
 
@@ -284,6 +288,7 @@
 "settings.row.solverServer" = "Solver Server";
 "settings.row.mainThreadWatchdog" = "Main Thread Watchdog";
 "settings.row.shareLog" = "Share Debug Log";
+"settings.row.support" = "Support Development";
 "settings.row.feedback" = "Send feedback";
 /* Solver-server URL alert */
 "settings.solver.message" = "URL of the solver server.";
@@ -367,6 +372,8 @@
 /* Channel tab bar */
 "channel.tab.videos" = "Videos";
 "channel.tab.live" = "Live";
+"channel.tab.shorts" = "Shorts";
+"shorts.shelf.title" = "Shorts";
 "channel.tab.playlists" = "Playlists";
 /* About sheet */
 "channel.about.title" = "About";

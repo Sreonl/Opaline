@@ -48,6 +48,9 @@ extension WatchViewController {
         }
         overlay.onCancel = { [weak self] in
             self?.dismissAutoplayOverlay()
+            // The video is still parked on its last frame: pressing Play
+            // there resumes nothing and hangs on the spinner.
+            self?.showEndScreen(reason: "autoplay cancelled")
         }
         return overlay
     }
@@ -70,6 +73,28 @@ extension WatchViewController {
                 equalTo: parent.bottomAnchor
             )
         ])
+    }
+
+    /// Previous walks the session's own back stack, so it stays greyed out
+    /// until the first in-player navigation.
+    func updateTransportAvailability() {
+        videoPlayerView?.hasPreviousVideo = !videoHistory.isEmpty
+        videoPlayerView?.updateCenterIcons()
+    }
+
+    /// Nothing plays after this video: Play becomes Replay and the controls
+    /// stay on screen.
+    func showEndScreen(reason: String) {
+        AppLog.player("playToEnd: end screen — \(reason)")
+        DispatchQueue.main.async { [weak self] in
+            guard let self else {
+                return
+            }
+            self.updateTransportAvailability()
+            self.videoPlayerView?.isAtEnd = true
+            self.videoPlayerView?.setControls(visible: true, animated: true)
+            self.videoPlayerView?.pauseAutoHide()
+        }
     }
 
     /// Control Center / AirPods "next": queue entry first, else the top

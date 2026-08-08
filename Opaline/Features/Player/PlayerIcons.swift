@@ -30,14 +30,6 @@ enum PlayerIcons {
         }
     }
 
-    static func rewind10() -> UIImage {
-        playerIcon("icon_Gobackward_10", size: 36)
-    }
-
-    static func forward10() -> UIImage {
-        playerIcon("icon_Goforward_10", size: 36)
-    }
-
     static func settings() -> UIImage {
         playerIcon("icon_Gear", size: 26)
     }
@@ -93,7 +85,8 @@ extension PlayerIcons {
         }
     }
 
-    private static func playerIcon(_ name: String, size: CGFloat) -> UIImage {
+    /// Not private: the end-screen icons live in another file.
+    static func playerIcon(_ name: String, size: CGFloat) -> UIImage {
         let iconSize = CGSize(width: size, height: size)
         let renderer = UIGraphicsImageRenderer(size: iconSize)
         let img = renderer.image { _ in

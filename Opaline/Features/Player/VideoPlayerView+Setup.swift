@@ -423,7 +423,7 @@ extension VideoPlayerView {
 
     private func configureRewindButton() {
         rewindButton.setImage(
-            PlayerIcons.rewind10(),
+            PlayerIcons.previous(),
             for: .normal
         )
         rewindButton.tintColor = .white
@@ -448,7 +448,7 @@ extension VideoPlayerView {
 
     private func configureForwardButton() {
         forwardButton.setImage(
-            PlayerIcons.forward10(),
+            PlayerIcons.next(),
             for: .normal
         )
         forwardButton.tintColor = .white
@@ -525,5 +525,32 @@ extension VideoPlayerView: UIGestureRecognizerDelegate {
             return true
         }
         return touch.location(in: window).y > 60
+    }
+}
+
+// MARK: - Layout
+
+extension VideoPlayerView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // bounds+position instead of frame: frame is undefined while the
+        // layer carries the pinch-zoom scale transform.
+        playerLayer.bounds = bounds
+        playerLayer.position = CGPoint(
+            x: bounds.midX,
+            y: bounds.midY
+        )
+        topGradientLayer.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: bounds.width,
+            height: 80
+        )
+        bottomGradientLayer.frame = CGRect(
+            x: 0,
+            y: bounds.height - 110,
+            width: bounds.width,
+            height: 110
+        )
     }
 }

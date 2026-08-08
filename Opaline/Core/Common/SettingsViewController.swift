@@ -1,16 +1,19 @@
 // swiftlint:disable file_length
 import UIKit
 
-/// Settings popup presented as a sheet from the toolbar.
+/// Settings popup presented as a sheet from the toolbar. One class serves
+/// every page — `page` picks which sections to build (see +Pages).
 final class SettingsViewController: UIViewController {
     enum Row {
-        case theme, autoDarkStart, autoDarkEnd
+        case pageAppearance, pageLanguage, pagePlayback, pageShorts
+        case pageSponsorBlock, pageCache, pageDebug
+        case theme, autoDarkStart, autoDarkEnd, appIcon
         case appLanguage, region
         case quality, backgroundPlayback, pipEnabled, hideStatusBar, showShorts
         case autoZoomToFill
         case autoplayEnabled, autoplayMixEnabled
         case autoDubEnabled, autoDubLanguage, autoDubIgnoreAI
-        case homeLayout
+        case homeLayout, defaultTab
         case persistCache, feedCacheDays
         case imageCacheEnabled, imageCacheDays
         case clearCache, rydEnabled
@@ -20,13 +23,19 @@ final class SettingsViewController: UIViewController {
         case solverEndpoint
         case mainThreadWatchdog
         case shareLog
-        case feedback
+        case feedback, support
     }
-    private struct Section {
+    enum Page {
+        case root, appearance, language, playback, shorts
+        case sponsorBlock, cache, debug
+    }
+    struct Section {
         let header: String?
         let footer: String?
         let rows: [Row]
     }
+
+    let page: Page
 
     private lazy var tableView: UITableView = {
         if #available(iOS 13, *) {
@@ -36,94 +45,8 @@ final class SettingsViewController: UIViewController {
         }
     }()
 
-    private var sections: [Section] {
-        var sponsorBlockRows: [Row] = [.sponsorBlockEnabled]
-        if SponsorBlockService.enabled { sponsorBlockRows.append(.sponsorBlockSettings) }
-        let rydFooter = "settings.footer.ryd".localized
-        let sbFooter = SponsorBlockService.enabled
-            ? SponsorBlockService.attributionText
-            : nil
-        var cacheRows: [Row] = [.persistCache]
-        if AppCache.persistenceEnabled {
-            cacheRows.append(.feedCacheDays)
-        }
-        cacheRows.append(.imageCacheEnabled)
-        if ThumbnailImageView.cachingEnabled {
-            cacheRows.append(.imageCacheDays)
-        }
-        cacheRows.append(.clearCache)
-        var autoDubRows: [Row] = [.autoDubEnabled]
-        if AutoDubPreference.isEnabled {
-            autoDubRows.append(contentsOf: [.autoDubLanguage, .autoDubIgnoreAI])
-        }
-        var themeRows: [Row] = [.theme]
-        if showsAutoHours {
-            themeRows.append(contentsOf: [.autoDarkStart, .autoDarkEnd])
-        }
-        return [
-            Section(
-                header: "settings.section.theme".localized,
-                footer: themeFooter,
-                rows: themeRows
-            ),
-            Section(
-                header: "settings.section.language".localized,
-                footer: "settings.footer.language".localized,
-                rows: [.appLanguage, .region]
-            ),
-            Section(
-                header: "settings.section.playback".localized,
-                footer: "settings.footer.playback".localized,
-                rows: [
-                    .quality, .backgroundPlayback, .pipEnabled,
-                    .hideStatusBar, .autoZoomToFill, .showShorts,
-                    .autoplayEnabled, .autoplayMixEnabled
-                ]
-            ),
-            Section(
-                header: "settings.section.autoDub".localized,
-                footer: "settings.footer.autoDub".localized,
-                rows: autoDubRows
-            ),
-            Section(
-                header: "settings.section.home".localized,
-                footer: "settings.footer.home".localized,
-                rows: [.homeLayout]
-            ),
-            Section(
-                header: "settings.section.notifications".localized,
-                footer: nil,
-                rows: [.notificationSettings]
-            ),
-            Section(
-                header: "settings.section.ryd".localized,
-                footer: rydFooter,
-                rows: [.rydEnabled]
-            ),
-            Section(
-                header: "settings.section.sponsorblock".localized,
-                footer: sbFooter,
-                rows: sponsorBlockRows
-            ),
-            Section(
-                header: "settings.section.cache".localized,
-                footer: nil,
-                rows: cacheRows
-            ),
-            Section(
-                header: "settings.section.debug".localized,
-                footer: "settings.footer.debug".localized,
-                rows: [
-                    .playbackSource, .solverEndpoint,
-                    .mainThreadWatchdog, .shareLog
-                ]
-            ),
-            Section(header: nil, footer: appVersionFooter, rows: [.feedback])
-        ]
-    }
-
     /// iOS 12 auto mode is hour-scheduled; iOS 13+ follows the system.
-    private var showsAutoHours: Bool {
+    var showsAutoHours: Bool {
         guard ThemeManager.shared.themeMode == .auto else {
             return false
         }
@@ -133,7 +56,7 @@ final class SettingsViewController: UIViewController {
         return true
     }
 
-    private var themeFooter: String? {
+    var themeFooter: String? {
         guard ThemeManager.shared.themeMode == .auto else {
             return nil
         }
@@ -143,7 +66,7 @@ final class SettingsViewController: UIViewController {
         return "settings.footer.themeAutoHours".localized
     }
 
-    private var appVersionFooter: String {
+    var appVersionFooter: String {
         let info = Bundle.main.infoDictionary
         let version = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
@@ -159,9 +82,19 @@ final class SettingsViewController: UIViewController {
             + (isCustom ? "" : "settings.solver.defaultSuffix".localized)
     }
 
+    init(page: Page = .root) {
+        self.page = page
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "settings.title".localized
+        title = pageTitle
         // Titled, not `barButtonSystemItem: .done` — system items are
         // localized by iOS to the DEVICE language, ignoring the in-app
         // language override.
@@ -252,9 +185,21 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
 
     // swiftlint:disable:next cyclomatic_complexity function_body_length
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch sections[indexPath.section].rows[indexPath.row] {
+        let row = sections[indexPath.section].rows[indexPath.row]
+        if let pageCell = makePageCell(row) {
+            return pageCell
+        }
+        switch row {
+        case .pageAppearance, .pageLanguage, .pagePlayback, .pageShorts,
+             .pageSponsorBlock, .pageCache, .pageDebug:
+            return UITableViewCell()  // unreachable: makePageCell handles these
         case .theme:
             return makeThemeCell()
+        case .appIcon:
+            return makeDisclosureCell(
+                "settings.row.appIcon".localized,
+                value: AppIcon.selected.displayName
+            )
         case .appLanguage:
             return makeAppLanguageCell()
         case .region:
@@ -334,6 +279,11 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 "settings.row.homeLayout".localized,
                 value: HomeLayout.selected.displayName
             )
+        case .defaultTab:
+            return makeDisclosureCell(
+                "settings.row.defaultTab".localized,
+                value: DefaultTab.selected.displayName
+            )
         case .persistCache:
             return makeToggleCell(
                 "settings.row.feedCache".localized,
@@ -389,6 +339,8 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             return makeDisclosureCell("settings.row.shareLog".localized)
         case .feedback:
             return makeDisclosureCell("settings.row.feedback".localized)
+        case .support:
+            return makeDisclosureCell("settings.row.support".localized)
         case .playbackSource:
             return makeDisclosureCell(
                 "settings.row.playbackSource".localized,
@@ -423,6 +375,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = sections[indexPath.section].rows[indexPath.row]
         let handlers = [
+            handlePageSelection,
             handleDebugSelection, handleThemeSelection,
             handleLanguageSelection, handleAutoDubSelection,
             handleNotificationsSelection, handleGeneralSelection
@@ -454,6 +407,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             shareDebugLog()
         case .feedback:
             if let url = AppURLs.Feedback.issues {
+                UIApplication.shared.open(url)
+            }
+        case .support:
+            if let url = URL(string: AppURLs.Support.donate) {
                 UIApplication.shared.open(url)
             }
         case .playbackSource:
@@ -569,6 +526,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             showAutoHourPicker(isStart: false)
         case .homeLayout:
             showHomeLayoutPicker()
+        case .appIcon:
+            navigationController?.pushViewController(
+                AppIconViewController(), animated: true
+            )
+        case .defaultTab:
+            showDefaultTabPicker()
         default:
             return false
         }
@@ -651,6 +614,30 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
                 self.tableView.reloadData()
             }
             if layout == HomeLayout.selected {
+                action.setValue(true, forKey: "checked")
+            }
+            sheet.addAction(action)
+        }
+        sheet.addAction(UIAlertAction(title: "common.cancel".localized, style: .cancel))
+        configureCenteredPopover(sheet)
+        present(sheet, animated: true)
+    }
+
+    private func showDefaultTabPicker() {
+        let sheet = UIAlertController(
+            title: "settings.row.defaultTab".localized,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        for tab in DefaultTab.available {
+            let action = UIAlertAction(
+                title: tab.displayName,
+                style: .default
+            ) { _ in
+                DefaultTab.selected = tab
+                self.tableView.reloadData()
+            }
+            if tab == DefaultTab.selected {
                 action.setValue(true, forKey: "checked")
             }
             sheet.addAction(action)

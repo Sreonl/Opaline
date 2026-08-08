@@ -186,6 +186,7 @@
 "settings.title" = "设置";
 
 /* Section headers */
+"settings.section.appearance" = "外观";
 "settings.section.theme" = "主题";
 "settings.section.playback" = "播放";
 "settings.section.autoDub" = "配音";
@@ -206,6 +207,7 @@
 
 /* Theme rows; segment labels for dark/light/auto modes */
 "settings.row.theme" = "主题";
+"settings.row.appIcon" = "应用图标";
 "settings.theme.dark" = "深色";
 "settings.theme.light" = "浅色";
 "settings.theme.auto" = "自动";
@@ -221,7 +223,7 @@
 "settings.row.pip" = "画中画";
 "settings.row.hideStatusBar" = "全屏时隐藏状态栏";
 "settings.row.zoomToFill" = "全屏时缩放以填充";
-"settings.row.showShorts" = "在订阅中显示 YouTube Shorts";
+"settings.row.showShorts" = "显示 Shorts";
 "settings.row.autoplay" = "自动播放";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "自动播放（%1$@）";
@@ -233,6 +235,7 @@
 
 /* Home layout row + option names */
 "settings.row.homeLayout" = "首页布局";
+"settings.row.defaultTab" = "启动屏幕";
 "settings.homeLayout.grid" = "网格";
 "settings.homeLayout.rails" = "横向轨道";
 
@@ -259,6 +262,7 @@
 "settings.row.playbackSource" = "播放源";
 "settings.row.solverServer" = "Solver server";
 "settings.row.shareLog" = "分享调试日志";
+"settings.row.support" = "支持开发";
 "settings.row.feedback" = "发送反馈";
 /* Solver-server URL alert */
 "settings.solver.message" = "求解器服务器的 URL。";

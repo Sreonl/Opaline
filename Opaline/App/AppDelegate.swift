@@ -38,6 +38,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         )
         NotificationCenter.default.addObserver(
             self,
+            selector: #selector(warmSecondaryTabs),
+            name: .homeFeedDidSettle,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
             selector: #selector(applyWindowTheme),
             name: ThemeManager.didChangeNotification,
             object: nil
@@ -106,6 +112,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    /// Once per launch: the caches only need filling before the user
+    /// first opens those tabs, and the screens revalidate themselves
+    /// on every appearance after that.
+    @objc
+    private func warmSecondaryTabs() {
+        NotificationCenter.default.removeObserver(
+            self, name: .homeFeedDidSettle, object: nil
+        )
+        BackgroundRefreshService.shared.warmSecondaryCaches()
+    }
+
     private func makeSplashViewController() -> SplashViewController {
         let splash = SplashViewController()
         splash.onComplete = { [weak self] in
@@ -159,6 +176,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         VideoRouter.shared.watchViewControllerFactory = { [dependencies] video in
             dependencies.makeWatchViewController(video: video)
+        }
+        let deps = dependencies
+        VideoRouter.shared.shortsViewControllerFactory = { video, entry in
+            deps.makeShortsViewController(seedVideo: video, entry: entry)
         }
     }
 

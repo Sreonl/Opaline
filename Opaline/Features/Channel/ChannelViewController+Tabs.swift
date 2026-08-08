@@ -56,6 +56,9 @@ extension ChannelViewController {
             return
         }
         currentTab = tab
+        // Shorts and videos have different card shapes; the layout has to be
+        // recomputed before the new tab's items arrive.
+        updateItemSize()
         filterChips = []
         filterBar.clearTitles()
         filterBar.isHidden = true
@@ -67,6 +70,8 @@ extension ChannelViewController {
         switch currentTab {
         case .videos:
             loadVideoTab(params: ChannelTabParams.videos)
+        case .shorts:
+            loadVideoTab(params: ChannelTabParams.shorts)
         case .live:
             loadVideoTab(params: ChannelTabParams.live)
         case .playlists:

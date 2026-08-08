@@ -182,6 +182,7 @@
 "settings.title" = "Configurações";
 
 /* Section headers */
+"settings.section.appearance" = "Aparência";
 "settings.section.theme" = "Aparência";
 "settings.section.playback" = "Reprodução";
 "settings.section.autoDub" = "Dublagem";
@@ -202,6 +203,7 @@
 
 /* Theme rows; segment labels for dark/light/auto modes */
 "settings.row.theme" = "Aparência";
+"settings.row.appIcon" = "Ícone da app";
 "settings.theme.dark" = "Escuro";
 "settings.theme.light" = "Claro";
 "settings.theme.auto" = "Auto";
@@ -217,7 +219,7 @@
 "settings.row.pip" = "Picture-in-Picture";
 "settings.row.hideStatusBar" = "Ocultar barra de status em tela cheia";
 "settings.row.zoomToFill" = "Ampliar para preencher em tela cheia";
-"settings.row.showShorts" = "Mostrar YouTube Shorts nas Inscrições";
+"settings.row.showShorts" = "Mostrar Shorts";
 "settings.row.autoplay" = "Reprodução automática";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "Reprodução automática (%1$@)";
@@ -229,6 +231,7 @@
 
 /* Home layout row + option names */
 "settings.row.homeLayout" = "Layout da página inicial";
+"settings.row.defaultTab" = "Ecrã inicial";
 "settings.homeLayout.grid" = "Grade simples";
 "settings.homeLayout.rails" = "Trilhos";
 
@@ -255,6 +258,7 @@
 "settings.row.playbackSource" = "Fonte de reprodução";
 "settings.row.solverServer" = "Solver server";
 "settings.row.shareLog" = "Compartilhar log de depuração";
+"settings.row.support" = "Apoiar o desenvolvimento";
 "settings.row.feedback" = "Enviar feedback";
 /* Solver-server URL alert */
 "settings.solver.message" = "URL do servidor solver.";

@@ -19,12 +19,10 @@ extension VideoPlayerView {
     func handleDoubleTap(
         _ gesture: UITapGestureRecognizer
     ) {
+        // Straight to the seek, not through the buttons: those now switch
+        // videos, and the gesture is the only way to seek by steps.
         let xPosition = gesture.location(in: self).x
-        if xPosition < bounds.width / 2 {
-            rewindTapped()
-        } else {
-            forwardTapped()
-        }
+        seek(direction: xPosition < bounds.width / 2 ? -1 : 1)
         if !controlsVisible {
             setControls(visible: true, animated: true)
         }
@@ -126,6 +124,10 @@ extension VideoPlayerView {
         guard let player else {
             return
         }
+        if isAtEnd {
+            replay()
+            return
+        }
         if player.rate > 0 {
             multitaskPause.lastUserPause = CACurrentMediaTime()
             player.pause()
@@ -135,14 +137,15 @@ extension VideoPlayerView {
         scheduleAutoHide()
     }
 
+    // Seeking lives on the double-tap gesture, as in the official app.
     @objc
     func rewindTapped() {
-        seek(direction: -1)
+        if hasPreviousVideo { onPrevious?() }
     }
 
     @objc
     func forwardTapped() {
-        seek(direction: 1)
+        onNext?()
     }
 
     @objc
@@ -259,6 +262,10 @@ extension VideoPlayerView {
 
 extension VideoPlayerView {
     func updatePlayPauseIcon() {
+        if isAtEnd {
+            playPauseButton.setImage(PlayerIcons.replay(), for: .normal)
+            return
+        }
         let isPlaying = (player?.rate ?? 0) > 0
         let icon = isPlaying
             ? PlayerIcons.pause()
@@ -273,11 +280,5 @@ extension VideoPlayerView {
             ),
             for: .normal
         )
-    }
-
-    func setCenter(hidden: Bool) {
-        playPauseButton.isHidden = hidden
-        rewindButton.isHidden = hidden
-        forwardButton.isHidden = hidden
     }
 }

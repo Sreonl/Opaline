@@ -66,11 +66,45 @@ extension InnertubeClient {
         if let info = parseAvatarLockup(
             json, fallbackVideo: fallbackVideo
         ) {
+            return completed(info, from: json)
+        }
+        return derivedChannelInfo(json, fallbackVideo: fallbackVideo)
+    }
+
+    /// A lockup can parse without a thumbnail or a name; the owner renderer
+    /// carries both, so it fills whatever the lockup left empty.
+    private static func completed(
+        _ info: ChannelInfo, from json: [String: Any]
+    ) -> ChannelInfo {
+        let owner = extractOwnerInfo(json)
+        guard info.avatarURL == nil || info.title.isEmpty else {
             return info
         }
-        let enriched = enrichWithOwnerInfo(
+        return ChannelInfo(
+            id: info.id,
+            title: info.title.isEmpty
+                ? (owner.title ?? info.title) : info.title,
+            avatarURL: info.avatarURL ?? owner.avatarURL,
+            subscriberCountText: info.subscriberCountText,
+            bannerURL: info.bannerURL,
+            isVerified: info.isVerified,
+            description: info.description,
+            contactInfo: info.contactInfo,
+            videoCountText: info.videoCountText
+        )
+    }
+
+    private static func derivedChannelInfo(
+        _ json: [String: Any],
+        fallbackVideo: Video
+    ) -> ChannelInfo? {
+        var enriched = enrichWithOwnerInfo(
             json, video: fallbackVideo
         )
+        if enriched.channelName.isEmpty,
+           let name = extractOwnerInfo(json).title {
+            enriched.channelName = name
+        }
         if let info = buildFallbackChannel(
             fallbackVideo: enriched
         ) {
@@ -85,25 +119,30 @@ extension InnertubeClient {
         _ json: [String: Any],
         video: Video
     ) -> Video {
-        guard video.channelId == nil else {
+        // Gate on what is actually missing, not on the channelId alone: a
+        // short opened from a feed already knows its channel but has no
+        // avatar, and the owner renderer is the only place the watch page
+        // carries one.
+        guard video.channelId == nil || video.channelAvatarURL == nil else {
             return video
         }
         let owner = extractOwnerInfo(json)
-        guard let chId = owner.channelId else {
+        guard owner.channelId != nil || owner.avatarURL != nil else {
             return video
         }
         return Video(
             id: video.id,
             title: video.title,
-            channelId: chId,
+            channelId: video.channelId ?? owner.channelId,
             channelName: video.channelName,
-            channelAvatarURL: owner.avatarURL,
+            channelAvatarURL: video.channelAvatarURL ?? owner.avatarURL,
             thumbnailURL: video.thumbnailURL,
             viewCount: video.viewCount,
             publishedAt: video.publishedAt,
             duration: video.duration,
             isLive: video.isLive,
-            playlistId: video.playlistId
+            playlistId: video.playlistId,
+            isShort: video.isShort
         )
     }
 
@@ -127,31 +166,6 @@ extension InnertubeClient {
             contactInfo: nil,
             videoCountText: nil
         )
-    }
-
-    // Extract channelId + avatarURL from slimOwnerRenderer / videoOwnerRenderer
-    private static func extractOwnerInfo(
-        _ json: [String: Any]
-    ) -> (channelId: String?, avatarURL: String?) {
-        for name in [
-            "slimOwnerRenderer",
-            "videoOwnerRenderer",
-            "ownerRenderer",
-            "channelThumbnailWithLinkRenderer"
-        ] {
-            guard let owner = firstRenderer(
-                in: json, named: name
-            ) else { continue }
-            let chId = firstMatchingBrowseId(in: owner)
-                .flatMap { $0.isEmpty ? nil : $0 }
-            let avatarURL = extractThumbnailURL(
-                from: owner["thumbnail"]
-            )
-            if chId != nil || avatarURL != nil {
-                return (chId, avatarURL)
-            }
-        }
-        return (nil, nil)
     }
 }
 

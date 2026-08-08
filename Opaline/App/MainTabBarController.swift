@@ -5,7 +5,7 @@ protocol ScrollableToTop: AnyObject {
 }
 
 class MainTabBarController: UITabBarController {
-    private let dependencies: AppDependencies
+    let dependencies: AppDependencies
     private weak var playerPanel: PlayerPanelViewController?
     private var miniPlayerBar: MiniPlayerBar?
     private var miniPlayerBarBottomConstraint: NSLayoutConstraint?
@@ -60,10 +60,23 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         delegate = self
         viewControllers = buildTabs()
+        // Falls back to the first tab when the preferred one is not built
+        // (Shorts picked, then hidden).
+        if let index = viewControllers?.firstIndex(where: {
+            $0.tabBarItem.tag == DefaultTab.selected.tabTag
+        }) {
+            selectedIndex = index
+        }
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(applyTheme),
             name: ThemeManager.didChangeNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleShowShortsTabChange),
+            name: .showShortsSettingDidChange,
             object: nil
         )
         applyTheme()
@@ -98,7 +111,14 @@ class MainTabBarController: UITabBarController {
     }
 
     private func buildTabs() -> [UIViewController] {
-        [makeHomeTab(), makeSubscriptionsTab(), makeLibraryTab()]
+        var tabs = [makeHomeTab(), makeSubscriptionsTab()]
+        // Only for users who want shorts at all — the same setting that
+        // hides them from every feed.
+        if wantsShortsTab {
+            tabs.append(makeShortsTab())
+        }
+        tabs.append(makeLibraryTab())
+        return tabs
     }
 
     private func makeHomeTab() -> UIViewController {
@@ -112,7 +132,7 @@ class MainTabBarController: UITabBarController {
         home.tabBarItem = UITabBarItem(
             title: "home.title".localized,
             image: TabBarIcons.home(),
-            tag: 0
+            tag: DefaultTab.home.tabTag
         )
         return home
     }
@@ -125,7 +145,7 @@ class MainTabBarController: UITabBarController {
         subs.tabBarItem = UITabBarItem(
             title: "subscriptions.title".localized,
             image: TabBarIcons.subscriptions(),
-            tag: 1
+            tag: DefaultTab.subscriptions.tabTag
         )
         return subs
     }
@@ -139,7 +159,7 @@ class MainTabBarController: UITabBarController {
         library.tabBarItem = UITabBarItem(
             title: "library.title".localized,
             image: TabBarIcons.library(),
-            tag: 2
+            tag: DefaultTab.library.tabTag
         )
         return library
     }

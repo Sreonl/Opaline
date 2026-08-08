@@ -182,6 +182,7 @@
 "settings.title" = "Impostazioni";
 
 /* Section headers */
+"settings.section.appearance" = "Aspetto";
 "settings.section.theme" = "Tema";
 "settings.section.playback" = "Riproduzione";
 "settings.section.autoDub" = "Doppiaggio";
@@ -202,6 +203,7 @@
 
 /* Theme rows; segment labels for dark/light/auto modes */
 "settings.row.theme" = "Tema";
+"settings.row.appIcon" = "Icona dell'app";
 "settings.theme.dark" = "Scuro";
 "settings.theme.light" = "Chiaro";
 "settings.theme.auto" = "Auto";
@@ -217,7 +219,7 @@
 "settings.row.pip" = "Picture-in-Picture";
 "settings.row.hideStatusBar" = "Nascondi barra di stato a schermo intero";
 "settings.row.zoomToFill" = "Riempimento automatico a schermo intero";
-"settings.row.showShorts" = "Mostra YouTube Shorts negli abbonamenti";
+"settings.row.showShorts" = "Mostra Shorts";
 "settings.row.autoplay" = "Riproduzione automatica";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "Riproduzione automatica (%1$@)";
@@ -229,6 +231,7 @@
 
 /* Home layout row + option names */
 "settings.row.homeLayout" = "Layout home";
+"settings.row.defaultTab" = "Schermata iniziale";
 "settings.homeLayout.grid" = "Griglia semplice";
 "settings.homeLayout.rails" = "Corsie orizzontali";
 
@@ -255,6 +258,7 @@
 "settings.row.playbackSource" = "Fonte di riproduzione";
 "settings.row.solverServer" = "Solver server";
 "settings.row.shareLog" = "Condividi log di debug";
+"settings.row.support" = "Sostieni lo sviluppo";
 "settings.row.feedback" = "Invia feedback";
 /* Solver-server URL alert */
 "settings.solver.message" = "URL del server solver.";

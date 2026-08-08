@@ -139,6 +139,7 @@
 
 "settings.title" = "Налаштування";
 
+"settings.section.appearance" = "Зовнішній вигляд";
 "settings.section.theme" = "Тема";
 "settings.section.playback" = "Відтворення";
 "settings.section.autoDub" = "Дубляж";
@@ -157,6 +158,7 @@
 "settings.footer.debug" = "Примусовий вибір джерела відтворення. Зазвичай використовується Android VR з автоматичним резервним джерелом. Solver server обслуговує джерело Mobile Web + pot (випуск pot і розв'язання n на iOS 12–13).";
 
 "settings.row.theme" = "Тема";
+"settings.row.appIcon" = "Значок застосунку";
 "settings.theme.dark" = "Темна";
 "settings.theme.light" = "Світла";
 "settings.theme.auto" = "Авто";
@@ -169,7 +171,7 @@
 "settings.row.pip" = "Картинка в картинці";
 "settings.row.hideStatusBar" = "Приховувати рядок стану в повноекранному режимі";
 "settings.row.zoomToFill" = "Заповнювати екран у повноекранному режимі";
-"settings.row.showShorts" = "Показувати Shorts у підписках";
+"settings.row.showShorts" = "Показувати Shorts";
 "settings.row.autoplay" = "Автовідтворення";
 /* %1$@ = localized "Mix" term (player.related.mix) */
 "settings.row.autoplayMix" = "Автовідтворення (%1$@)";
@@ -180,6 +182,7 @@
 "settings.row.autoDubIgnoreAI" = "Ігнорувати ШІ-дубляж";
 
 "settings.row.homeLayout" = "Вигляд головної";
+"settings.row.defaultTab" = "Екран за замовчуванням";
 "settings.homeLayout.grid" = "Проста сітка";
 "settings.homeLayout.rails" = "Горизонтальні стрічки";
 
@@ -201,6 +204,7 @@
 "settings.row.playbackSource" = "Джерело";
 "settings.row.solverServer" = "Solver server";
 "settings.row.shareLog" = "Поділитися журналом налагодження";
+"settings.row.support" = "Підтримати розробку";
 "settings.row.feedback" = "Надіслати відгук";
 "settings.solver.message" = "Адреса solver server.";
 "settings.solver.reset" = "Скинути до типового";

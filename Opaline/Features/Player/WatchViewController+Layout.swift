@@ -29,7 +29,8 @@ extension WatchViewController {
             ActionBarItem(
                 button: downloadButton,
                 icon: "icon_download",
-                label: "player.action.download".localized
+                label: "player.action.download".localized,
+                countLabel: downloadStatusLabel
             )
         ]
     }
@@ -56,10 +57,17 @@ extension WatchViewController {
         nc.addObserver(self, selector: #selector(appWillEnterForeground), name: fg, object: nil)
         nc.addObserver(
             self,
+            selector: #selector(queueDidChange),
+            name: PlaybackQueue.didChangeNotification,
+            object: nil
+        )
+        nc.addObserver(
+            self,
             selector: #selector(audioTracksDidChange(_:)),
             name: .sourceAudioTracksDidChange,
             object: nil
         )
+        addDownloadObservers()
         // Only to release the orientation lock a fullscreen toggle took — the
         // rotation itself is UIKit's job. Generation runs app-wide from
         // `AppDelegate`, so there is nothing to start here.
@@ -68,6 +76,23 @@ extension WatchViewController {
                 self,
                 selector: #selector(handleDeviceOrientationChange),
                 name: UIDevice.orientationDidChangeNotification,
+                object: nil
+            )
+        }
+    }
+
+    /// Both feed the same button: one fires when a job starts, finishes or is
+    /// deleted, the other once a second while it runs.
+    private func addDownloadObservers() {
+        let nc = NotificationCenter.default
+        for name in [
+            DownloadStore.didChangeNotification,
+            VideoDownloader.didProgressNotification
+        ] {
+            nc.addObserver(
+                self,
+                selector: #selector(updateDownloadButton),
+                name: name,
                 object: nil
             )
         }
@@ -101,7 +126,8 @@ extension WatchViewController {
         // the tap survives the whole drag and opens a video on lift-off.
         scrollView.canCancelContentTouches = true
         scrollView.delegate = self
-        [scrollView, playerContainer, sidebarContainer].forEach { view.addSubview($0) }
+        [scrollView, playerContainer, sidebarContainer, queueBar]
+            .forEach { view.addSubview($0) }
         scrollView.addSubview(contentView)
         let pc = playerContainer, sv = scrollView
         let sc = sidebarContainer, safe = view.safeAreaLayoutGuide
@@ -235,6 +261,9 @@ extension WatchViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         likeButton.addTarget(self, action: #selector(likeTapped), for: .touchUpInside)
         dislikeButton.addTarget(self, action: #selector(dislikeTapped), for: .touchUpInside)
+        downloadButton.addTarget(
+            self, action: #selector(downloadTapped), for: .touchUpInside
+        )
         for item in actionBarItems {
             item.button.addTapFeedback()
         }
@@ -309,6 +338,7 @@ extension WatchViewController {
         cv.addSubview(commentsStackView)
         setupCommentsTableView()
         setupCommentsPanel()
+        setupQueueBar()
     }
 
     /// The always-visible "Comments" title above the collapsed preview card
@@ -335,13 +365,60 @@ extension WatchViewController {
         tv.separatorStyle = .none
     }
 
+    /// Pinned to the bottom, above the safe area, over whatever is under it.
+    /// Portrait that is the page, so the strip spans the screen. Landscape
+    /// puts the comments under the player and the queue's own list in the
+    /// sidebar, so a full-width strip lay over the comments — on an iPad wide
+    /// enough for both, it was lost there. It spans the sidebar instead, over
+    /// the list it belongs to. Hidden until a queue exists.
+    private func setupQueueBar() {
+        queueBar.isHidden = true
+        queueBar.onTap = { [weak self] in
+            self?.showQueue()
+        }
+        let safe = view.safeAreaLayoutGuide
+        queueBarSlot.portrait = [
+            queueBar.leadingAnchor.constraint(
+                equalTo: safe.leadingAnchor, constant: 16
+            ),
+            queueBar.trailingAnchor.constraint(
+                equalTo: safe.trailingAnchor, constant: -16
+            )
+        ]
+        queueBarSlot.landscape = [
+            queueBar.leadingAnchor.constraint(
+                equalTo: sidebarContainer.leadingAnchor, constant: 16
+            ),
+            queueBar.trailingAnchor.constraint(
+                equalTo: sidebarContainer.trailingAnchor, constant: -16
+            )
+        ]
+        NSLayoutConstraint.activate(queueBarSlot.portrait + [
+            queueBar.bottomAnchor.constraint(
+                equalTo: safe.bottomAnchor, constant: -8
+            ),
+            queueBar.heightAnchor.constraint(
+                equalToConstant: QueueBarView.height
+            )
+        ])
+    }
+
     private func setupCommentsPanel() {
-        let pan = UIPanGestureRecognizer(target: self, action: #selector(handleCommentsPanelPan))
-        commentsPanel.dragRegion.addGestureRecognizer(pan)
+        makeSheetDraggable(commentsPanel)
         commentsPanel.onSelectSort = { [weak self] index in
             self?.selectCommentSort(at: index)
         }
         commentsPanel.isHidden = true
+    }
+
+    /// Both panels drag by their handle-and-header region; the table view
+    /// underneath keeps its own scroll gesture.
+    func makeSheetDraggable(_ sheet: PlayerSheetView) {
+        let pan = UIPanGestureRecognizer(
+            target: self,
+            action: #selector(handleSheetPan)
+        )
+        sheet.dragRegion.addGestureRecognizer(pan)
     }
 
     /// A UIStackView does not draw its own `backgroundColor` before iOS 14 —

@@ -35,8 +35,7 @@
 > - one that serves a single 360p quality and starts instantly
 >
 > Sources are tried from the top down until one plays. Content made for kids
-> comes only from the 1080p source or the 360p one. Livestreams on kids channels
-> still do not play.
+> comes only from the 1080p source or the 360p one.
 >
 > Nothing to do beyond updating. Your account, settings and history are
 > untouched.
@@ -78,6 +77,7 @@ When Google dropped support for the official YouTube app on older devices, there
 - **Video playback** — up to 1080p 60fps on every device; 2K/4K on hardware with AV1 decode (iPhone 15 Pro and newer, M3+ iPads)
 - **Shorts** — a native full-screen viewer with vertical swiping, likes, comments and sharing; the next short is preloaded so it opens on video rather than a poster. Tapping a short anywhere carries that list into the viewer, and the whole tab can be switched off
 - **Kids content** — plays videos the standard API sources refuse, via a dedicated playback source
+- **Offline downloads** — save a video to the device and watch it with no network. Its page comes along: thumbnail, description, like counts and the comments as of the moment you saved it. Settings → Downloads picks the quality, how many comments and which subtitle languages travel with it, and a video that plays dubbed in your language is saved dubbed
 - **Pinch to zoom** — fill the screen in fullscreen with a pinch, or turn on Zoom to Fill to do it automatically
 - **Background audio** — continue listening with the screen off
 - **Media controls** — play/pause and next/previous video from Control Center, the lock screen and headphones
@@ -117,6 +117,7 @@ When Google dropped support for the official YouTube app on older devices, there
   <source media="(prefers-color-scheme: dark)" srcset="screenshots/app/iphone/dark/settings.jpeg">
   <img src="screenshots/app/iphone/light/settings.jpeg" width="32%" alt="Settings">
 </picture>
+<img src="screenshots/app/iphone/light/shorts.jpeg" width="32%" alt="Shorts viewer">
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="screenshots/app/ipad/dark/recommendations.jpeg">
   <img src="screenshots/app/ipad/light/recommendations.jpeg" width="63%" alt="iPad home feed">
@@ -182,9 +183,7 @@ Install the `.ipa` package directly:
 ## Known Issues and Limitations
 
 - Playback speeds above 2x may cause issues
-- Livestreams on kids channels don't play — no source hands out a stream we can read ([#83](https://github.com/verback2308/Opaline/issues/83))
 - Comments are read-only — you can browse and sort them and open replies, but not post, reply or like
-- Offline download is not yet available
 - Notification delivery is scheduled by iOS, which grants background time at its own discretion — expect news to arrive within hours of publication, not minutes, and not at all while Background App Refresh or Low Power Mode says otherwise
 - **Picture in Picture is limited by the system before iOS 15**, and no app can work around it: the window survives exactly one video, and switching to another one closes it and leaves audio playing — [the full findings are in issue #31](https://github.com/verback2308/Opaline/issues/31#issuecomment-5148224679)
   - Before iOS 14.2 the system only starts PiP by itself from **fullscreen**. Leaving the app while the video plays inline gives background audio instead — the PiP button works in both cases

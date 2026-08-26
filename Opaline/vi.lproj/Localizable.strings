@@ -73,6 +73,8 @@
 
 "video.menu.playNext" = "Thêm vào hàng đợi";
 "video.menu.watchLater" = "Xem sau";
+"video.menu.feedbackTuned" = "Cảm ơn bạn đã thao tác! Chúng tôi sẽ điều chỉnh các nội dung đề xuất để phù hợp với bạn hơn.";
+"video.menu.feedbackRemoved" = "Đã xóa";
 "video.menu.watchLaterName" = "Xem sau";
 "video.menu.removeFrom" = "Xóa khỏi %1$@";
 "video.menu.removeFromQueue" = "Xoá khỏi hàng đợi";
@@ -181,6 +183,9 @@
 
 /* Playback rows */
 "settings.row.defaultQuality" = "Chất lượng mặc định";
+"settings.section.videoQuality" = "Lựa chọn ưu tiên về chất lượng video";
+"settings.row.qualityWiFi" = "Qua mạng Wi-Fi";
+"settings.row.qualityCellular" = "Qua mạng di động";
 "settings.quality.auto" = "Tự động";
 "settings.row.backgroundPlayback" = "Phát trong nền";
 "settings.row.pip" = "Hình trong hình";

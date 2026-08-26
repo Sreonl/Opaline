@@ -93,6 +93,8 @@
 
 "video.menu.playNext" = "添加到待播列表";
 "video.menu.watchLater" = "稍后观看";
+"video.menu.feedbackTuned" = "好的。我们会努力向你推荐更符合你喜好的内容。";
+"video.menu.feedbackRemoved" = "已移除";
 "video.menu.watchLaterName" = "稍后观看";
 "video.menu.removeFrom" = "Remove from %1$@";
 "video.menu.removeFromQueue" = "从队列中移除";
@@ -221,6 +223,9 @@
 
 /* Playback rows */
 "settings.row.defaultQuality" = "默认画质";
+"settings.section.videoQuality" = "视频画质偏好";
+"settings.row.qualityWiFi" = "使用 WLAN";
+"settings.row.qualityCellular" = "使用移动网络";
 /* The "Auto" entry of the default-quality picker (stored value stays English) */
 "settings.quality.auto" = "自动";
 "settings.row.backgroundPlayback" = "后台播放";

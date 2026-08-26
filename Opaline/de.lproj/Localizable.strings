@@ -89,6 +89,8 @@
 
 "video.menu.playNext" = "Zur Warteschlange hinzufügen";
 "video.menu.watchLater" = "Später ansehen";
+"video.menu.feedbackTuned" = "Ok, wir werden deine Empfehlungen anpassen.";
+"video.menu.feedbackRemoved" = "Entfernt";
 "video.menu.watchLaterName" = "Später ansehen";
 "video.menu.removeFrom" = "Remove from %1$@";
 "video.menu.removeFromQueue" = "Aus der Wiedergabeliste entfernen";
@@ -215,6 +217,9 @@
 
 /* Playback rows */
 "settings.row.defaultQuality" = "Standardqualität";
+"settings.section.videoQuality" = "Einstellungen für Videoqualität";
+"settings.row.qualityWiFi" = "Über WLAN";
+"settings.row.qualityCellular" = "Über Mobilfunknetz";
 /* The "Auto" entry of the default-quality picker (stored value stays English) */
 "settings.quality.auto" = "Auto";
 "settings.row.backgroundPlayback" = "Hintergrundwiedergabe";

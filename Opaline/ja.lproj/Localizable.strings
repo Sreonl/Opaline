@@ -302,6 +302,11 @@
 "search.placeholder" = "YouTubeを検索";
 /* Header above the recent-search list */
 "search.recent" = "最近の検索";
+"search.clearHistory" = "検索履歴を削除";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "検索履歴を削除しますか？";
+"search.clearHistory.message" = "このデバイスで行った YouTube の検索履歴が削除されます。";
+"search.clearHistory.confirm" = "履歴を削除";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "フィルタ";
 "search.filters.active" = "フィルター •";

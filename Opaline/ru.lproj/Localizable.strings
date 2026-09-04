@@ -294,6 +294,11 @@
 "search.title" = "Поиск";
 "search.placeholder" = "Поиск на YouTube";
 "search.recent" = "Недавние запросы";
+"search.clearHistory" = "Очистить историю поиска";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "Очистить историю поиска?";
+"search.clearHistory.message" = "История поиска без входа в аккаунт на этом устройстве будет удалена.";
+"search.clearHistory.confirm" = "Очистить историю";
 "search.filters" = "Фильтры";
 "search.filters.active" = "Фильтры •";
 "search.filters.title" = "Фильтры поиска";

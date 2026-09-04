@@ -298,6 +298,11 @@
 "search.placeholder" = "Cerca su YouTube";
 /* Header above the recent-search list */
 "search.recent" = "Ricerche recenti";
+"search.clearHistory" = "Cancella cronologia delle ricerche";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "Cancellare la cronologia ricerche?";
+"search.clearHistory.message" = "Vengono eliminate le ricerche eseguite su YouTube da questo dispositivo.";
+"search.clearHistory.confirm" = "Canc. cronol.";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtri";
 "search.filters.active" = "Filtri •";

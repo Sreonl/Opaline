@@ -254,6 +254,11 @@
 "search.title" = "Пошук";
 "search.placeholder" = "Пошук на YouTube";
 "search.recent" = "Останні пошукові запити";
+"search.clearHistory" = "Очистити історію пошуку";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "Очистити історію пошуку?";
+"search.clearHistory.message" = "Пошуки на YouTube, виконані на цьому пристрої, буде видалено.";
+"search.clearHistory.confirm" = "Очистити";
 "search.filters" = "Фільтри";
 "search.filters.active" = "Фільтри •";
 "search.filters.title" = "Фільтри пошуку";

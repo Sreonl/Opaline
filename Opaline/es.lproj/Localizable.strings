@@ -298,6 +298,11 @@
 "search.placeholder" = "Buscar en YouTube";
 /* Header above the recent-search list */
 "search.recent" = "Búsquedas recientes";
+"search.clearHistory" = "Borrar historial de búsqueda";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "¿Borrar historial de búsqueda?";
+"search.clearHistory.message" = "Esto borrará las búsquedas realizadas con esta cuenta en este dispositivo.";
+"search.clearHistory.confirm" = "Borrar historial";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtros";
 "search.filters.active" = "Filtros •";

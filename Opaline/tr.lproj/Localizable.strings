@@ -302,6 +302,11 @@
 "search.placeholder" = "YouTube'da ara";
 /* Header above the recent-search list */
 "search.recent" = "Son aramalar";
+"search.clearHistory" = "Arama geçmişini temizleme";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "Arama Geçmişi temizlensin mi?";
+"search.clearHistory.message" = "Bu işlem, bu cihazda yapılan YouTube aramalarını temizler.";
+"search.clearHistory.confirm" = "Geçmişi temizle";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtreler";
 "search.filters.active" = "Filtreler •";

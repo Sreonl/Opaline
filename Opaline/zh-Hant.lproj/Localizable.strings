@@ -302,6 +302,11 @@
 "search.placeholder" = "搜尋 YouTube";
 /* Header above the recent-search list */
 "search.recent" = "最近的搜尋";
+"search.clearHistory" = "清除搜尋記錄";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "要清除搜尋記錄嗎？";
+"search.clearHistory.message" = "這項操作將會清除這個裝置上的 YouTube 搜尋記錄。";
+"search.clearHistory.confirm" = "清除搜尋記錄";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "篩選";
 "search.filters.active" = "篩選 •";

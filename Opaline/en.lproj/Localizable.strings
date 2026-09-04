@@ -406,6 +406,12 @@
 "search.placeholder" = "Search YouTube";
 /* Header above the recent-search list */
 "search.recent" = "Recent searches";
+/* Trailing row that wipes the recent-search list */
+"search.clearHistory" = "Clear search history";
+/* Confirmation alert before wiping the recent-search list */
+"search.clearHistory.title" = "Clear Search History?";
+"search.clearHistory.message" = "This will clear YouTube searches made on this device.";
+"search.clearHistory.confirm" = "Clear history";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filters";
 "search.filters.active" = "Filters •";

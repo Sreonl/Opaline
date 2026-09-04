@@ -8,7 +8,6 @@ class MainTabBarController: UITabBarController {
     let dependencies: AppDependencies
     private weak var playerPanel: PlayerPanelViewController?
     private var miniPlayerBar: MiniPlayerBar?
-    private var miniPlayerBarBottomConstraint: NSLayoutConstraint?
 
     // The player panel is parented to `RootContainerViewController`, which
     // forwards these to it directly — see the note there.
@@ -201,19 +200,17 @@ class MainTabBarController: UITabBarController {
         view.addSubview(bar)
         // Use a proportional width (1/3 of the parent) so the bar stays correctly
         // sized after device rotation without needing to recreate the constraint.
-        let bottomConstraint = bar.bottomAnchor.constraint(
-            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-            constant: -12
-        )
+        // Sit above the tab bar, not above the safe area: this view's safe area
+        // stops at the home indicator, so anchoring to it puts the card on top
+        // of the tabs and eats the taps on that side (issue #118).
         NSLayoutConstraint.activate([
             bar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
             bar.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0 / 3.0),
-            bottomConstraint
+            bar.bottomAnchor.constraint(equalTo: tabBar.topAnchor, constant: -12)
         ])
         bar.isHidden = true
         bar.alpha = 0
         miniPlayerBar = bar
-        miniPlayerBarBottomConstraint = bottomConstraint
 
         panel.miniBar = bar
         panel.view.transform = CGAffineTransform(translationX: 0, y: view.bounds.height)
@@ -226,7 +223,6 @@ class MainTabBarController: UITabBarController {
         }
         miniPlayerBar?.removeFromSuperview()
         miniPlayerBar = nil
-        miniPlayerBarBottomConstraint = nil
         panel.willMove(toParent: nil)
         panel.view.removeFromSuperview()
         panel.removeFromParent()

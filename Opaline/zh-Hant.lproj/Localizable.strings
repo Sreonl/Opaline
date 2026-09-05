@@ -516,6 +516,10 @@
 "downloads.progress" = "下載進度：%@%%";
 "downloads.muxing" = "正在處理";
 "downloads.cancel" = "取消下載";
+/* Menu action that shares a downloaded video out of the app.
+   Deliberately English in every locale: the official app has no
+   equivalent string, and inventing translations is not allowed. */
+"downloads.export" = "Save to Files";
 "downloads.delete" = "從已下載的內容中刪除";
 "downloads.retry" = "重新下載";
 "downloads.deleted" = "已刪除下載的內容";

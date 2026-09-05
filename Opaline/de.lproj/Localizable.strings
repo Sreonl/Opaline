@@ -514,6 +514,10 @@
 "downloads.progress" = "%@%% heruntergeladen";
 "downloads.muxing" = "Wird vorbereitet";
 "downloads.cancel" = "Download abbrechen";
+/* Menu action that shares a downloaded video out of the app.
+   Deliberately English in every locale: the official app has no
+   equivalent string, and inventing translations is not allowed. */
+"downloads.export" = "Save to Files";
 "downloads.delete" = "Aus Downloads löschen";
 "downloads.retry" = "Noch einmal herunterladen";
 "downloads.deleted" = "Download gelöscht";

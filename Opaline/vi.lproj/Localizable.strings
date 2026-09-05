@@ -430,6 +430,10 @@
 "downloads.progress" = "Đang tải xuống %@%%";
 "downloads.muxing" = "Đang chuẩn bị";
 "downloads.cancel" = "Hủy tải xuống";
+/* Menu action that shares a downloaded video out of the app.
+   Deliberately English in every locale: the official app has no
+   equivalent string, and inventing translations is not allowed. */
+"downloads.export" = "Save to Files";
 "downloads.delete" = "Xóa khỏi danh sách video tải xuống";
 "downloads.retry" = "Tải xuống lại";
 "downloads.deleted" = "Video tải xuống đã bị xóa";

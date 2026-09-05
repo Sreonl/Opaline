@@ -516,6 +516,10 @@
 "downloads.progress" = "İndiriliyor (%%%@)";
 "downloads.muxing" = "Hazırlanıyor";
 "downloads.cancel" = "İndirmeyi iptal et";
+/* Menu action that shares a downloaded video out of the app.
+   Deliberately English in every locale: the official app has no
+   equivalent string, and inventing translations is not allowed. */
+"downloads.export" = "Save to Files";
 "downloads.delete" = "İndirilenlerden sil";
 "downloads.retry" = "Tekrar indir";
 "downloads.deleted" = "İndirilen kopya silindi";

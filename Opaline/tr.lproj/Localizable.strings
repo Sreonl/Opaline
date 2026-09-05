@@ -302,6 +302,7 @@
 "search.placeholder" = "YouTube'da ara";
 /* Header above the recent-search list */
 "search.recent" = "Son aramalar";
+"search.noResults" = "Sonuç yok";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtreler";
 "search.filters.active" = "Filtreler •";

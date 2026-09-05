@@ -302,6 +302,7 @@
 "search.placeholder" = "搜尋 YouTube";
 /* Header above the recent-search list */
 "search.recent" = "最近的搜尋";
+"search.noResults" = "沒有結果";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "篩選";
 "search.filters.active" = "篩選 •";

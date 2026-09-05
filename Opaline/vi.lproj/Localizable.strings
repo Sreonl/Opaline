@@ -260,6 +260,7 @@
 "search.title" = "Tìm kiếm";
 "search.placeholder" = "Tìm trên YouTube";
 "search.recent" = "Các tìm kiếm gần đây";
+"search.noResults" = "Không có kết quả";
 "search.filters" = "Bộ lọc";
 "search.filters.active" = "Bộ lọc •";
 "search.filters.title" = "Bộ lọc tìm kiếm";

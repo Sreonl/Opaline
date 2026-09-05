@@ -302,6 +302,7 @@
 "search.placeholder" = "YouTubeを検索";
 /* Header above the recent-search list */
 "search.recent" = "最近の検索";
+"search.noResults" = "結果はありません";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "フィルタ";
 "search.filters.active" = "フィルター •";

@@ -406,6 +406,8 @@
 "search.placeholder" = "Search YouTube";
 /* Header above the recent-search list */
 "search.recent" = "Recent searches";
+/* Empty state when a search returns nothing */
+"search.noResults" = "No results";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filters";
 "search.filters.active" = "Filters •";

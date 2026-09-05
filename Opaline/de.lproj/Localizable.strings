@@ -296,6 +296,7 @@
 "search.placeholder" = "Auf YouTube suchen";
 /* Header above the recent-search list */
 "search.recent" = "Letzte Suchanfragen";
+"search.noResults" = "Keine Suchergebnisse";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filter";
 "search.filters.active" = "Filter •";

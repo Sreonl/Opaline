@@ -302,6 +302,7 @@
 "search.placeholder" = "搜索 YouTube";
 /* Header above the recent-search list */
 "search.recent" = "最近执行的搜索";
+"search.noResults" = "无任何结果";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "筛选";
 "search.filters.active" = "筛选 •";

@@ -254,6 +254,7 @@
 "search.title" = "Пошук";
 "search.placeholder" = "Пошук на YouTube";
 "search.recent" = "Останні пошукові запити";
+"search.noResults" = "Немає результатів";
 "search.filters" = "Фільтри";
 "search.filters.active" = "Фільтри •";
 "search.filters.title" = "Фільтри пошуку";

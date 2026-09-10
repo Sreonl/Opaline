@@ -139,6 +139,8 @@ When Google dropped support for the official YouTube app on older devices, there
 
 Opaline runs on devices with **iOS 12 and above**.
 
+For older hardware — armv7 devices on iOS 9.3, such as the iPad 2, iPad 3, iPad mini and iPhone 4S — [Joeviocoe/Opaline](https://github.com/Joeviocoe/Opaline) is a downport by another developer, with hardware-keyboard support and account-free local subscriptions and history. It is a separate project: we do not build, test or support it.
+
 ### Non-jailbroken devices
 
 **Option 1 — Add source (recommended)**

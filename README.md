@@ -16,32 +16,7 @@
 
 </div>
 
-> ### What happened between 14 and 17 August
->
-> Over those days YouTube kept changing how it hands out video, and most
-> third-party clients stopped playing, this one among them. Playback cut out
-> about a minute in. A fix would land, and the next change would take something
-> else away: dubbed audio, content made for kids, watch history.
->
-> **It plays again. Update to the latest version.**
->
-> Getting there meant rebuilding the way the app fetches video. There are
-> several sources now, listed in Settings → Playback, where you can drag them
-> into the order you want or switch off the ones you do not:
->
-> - two fast ones, no sign-in needed, dubbed audio works
-> - one that reaches 1080p but needs you to be signed in and takes longer to
->   start
-> - one that serves a single 360p quality and starts instantly
->
-> Sources are tried from the top down until one plays. Content made for kids
-> comes only from the 1080p source or the 360p one.
->
-> Nothing to do beyond updating. Your account, settings and history are
-> untouched.
->
-> <sub>Opaline was released as YTLite until August. It was renamed to avoid
-> confusion with an unrelated tweak of the same name and is not related to it.</sub>
+<sub>Opaline was released as YTLite until August. It was renamed to avoid confusion with an unrelated tweak of the same name and is not related to it.</sub>
 
 <div align="center">
 
@@ -138,6 +113,8 @@ When Google dropped support for the official YouTube app on older devices, there
 ## Installation
 
 Opaline runs on devices with **iOS 12 and above**.
+
+For older hardware — armv7 devices on iOS 9.3, such as the iPad 2, iPad 3, iPad mini and iPhone 4S — [Joeviocoe/Opaline](https://github.com/Joeviocoe/Opaline) is a downport by another developer, with hardware-keyboard support and account-free local subscriptions and history. It is a separate project: we do not build, test or support it.
 
 ### Non-jailbroken devices
 

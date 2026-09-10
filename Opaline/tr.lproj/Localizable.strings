@@ -307,6 +307,7 @@
 "search.clearHistory.title" = "Arama Geçmişi temizlensin mi?";
 "search.clearHistory.message" = "Bu işlem, bu cihazda yapılan YouTube aramalarını temizler.";
 "search.clearHistory.confirm" = "Geçmişi temizle";
+"search.noResults" = "Sonuç yok";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtreler";
 "search.filters.active" = "Filtreler •";

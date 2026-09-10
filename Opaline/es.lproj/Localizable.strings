@@ -303,6 +303,7 @@
 "search.clearHistory.title" = "¿Borrar historial de búsqueda?";
 "search.clearHistory.message" = "Esto borrará las búsquedas realizadas con esta cuenta en este dispositivo.";
 "search.clearHistory.confirm" = "Borrar historial";
+"search.noResults" = "No hay resultados";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtros";
 "search.filters.active" = "Filtros •";

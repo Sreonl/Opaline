@@ -259,6 +259,7 @@
 "search.clearHistory.title" = "Очистити історію пошуку?";
 "search.clearHistory.message" = "Пошуки на YouTube, виконані на цьому пристрої, буде видалено.";
 "search.clearHistory.confirm" = "Очистити";
+"search.noResults" = "Немає результатів";
 "search.filters" = "Фільтри";
 "search.filters.active" = "Фільтри •";
 "search.filters.title" = "Фільтри пошуку";

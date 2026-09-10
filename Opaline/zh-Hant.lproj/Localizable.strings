@@ -307,6 +307,7 @@
 "search.clearHistory.title" = "要清除搜尋記錄嗎？";
 "search.clearHistory.message" = "這項操作將會清除這個裝置上的 YouTube 搜尋記錄。";
 "search.clearHistory.confirm" = "清除搜尋記錄";
+"search.noResults" = "沒有結果";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "篩選";
 "search.filters.active" = "篩選 •";

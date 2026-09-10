@@ -301,6 +301,7 @@
 "search.clearHistory.title" = "Suchverlauf löschen?";
 "search.clearHistory.message" = "Dadurch werden Suchvorgänge gelöscht, die auf diesem Gerät ausgeführt wurden.";
 "search.clearHistory.confirm" = "Verlauf löschen";
+"search.noResults" = "Keine Suchergebnisse";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filter";
 "search.filters.active" = "Filter •";

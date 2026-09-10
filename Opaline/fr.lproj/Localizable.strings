@@ -303,6 +303,7 @@
 "search.clearHistory.title" = "Effacer l'historique des recherches ?";
 "search.clearHistory.message" = "Les recherches YouTube effectuées sur cet appareil seront supprimées.";
 "search.clearHistory.confirm" = "Effacer";
+"search.noResults" = "Aucun résultat.";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtres";
 "search.filters.active" = "Filtres •";

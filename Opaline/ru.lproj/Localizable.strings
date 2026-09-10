@@ -303,6 +303,7 @@
 "search.clearHistory.title" = "Очистить историю поиска?";
 "search.clearHistory.message" = "История поиска без входа в аккаунт на этом устройстве будет удалена.";
 "search.clearHistory.confirm" = "Очистить историю";
+"search.noResults" = "Ничего не найдено";
 "search.filters" = "Фильтры";
 "search.filters.active" = "Фильтры •";
 "search.filters.title" = "Фильтры поиска";

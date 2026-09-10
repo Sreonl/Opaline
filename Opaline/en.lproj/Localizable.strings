@@ -416,6 +416,8 @@
 "search.clearHistory.title" = "Clear Search History?";
 "search.clearHistory.message" = "This will clear YouTube searches made on this device.";
 "search.clearHistory.confirm" = "Clear history";
+/* Empty state when a search returns nothing */
+"search.noResults" = "No results";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filters";
 "search.filters.active" = "Filters •";

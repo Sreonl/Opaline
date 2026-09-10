@@ -303,6 +303,7 @@
 "search.clearHistory.title" = "Cancellare la cronologia ricerche?";
 "search.clearHistory.message" = "Vengono eliminate le ricerche eseguite su YouTube da questo dispositivo.";
 "search.clearHistory.confirm" = "Canc. cronol.";
+"search.noResults" = "Nessun risultato";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "Filtri";
 "search.filters.active" = "Filtri •";

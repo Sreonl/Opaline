@@ -307,6 +307,7 @@
 "search.clearHistory.title" = "検索履歴を削除しますか？";
 "search.clearHistory.message" = "このデバイスで行った YouTube の検索履歴が削除されます。";
 "search.clearHistory.confirm" = "履歴を削除";
+"search.noResults" = "結果はありません";
 /* Filters toolbar button; the dotted variant marks active filters */
 "search.filters" = "フィルタ";
 "search.filters.active" = "フィルター •";
